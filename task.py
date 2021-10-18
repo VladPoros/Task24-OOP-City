@@ -6,7 +6,6 @@ class City:
         self.year = year
 
     def __add__(self, other):
-        new_name_city = 'New City'
         population = self.population + other.population
         square = self.square + other.square
         year = present_year()
@@ -19,21 +18,16 @@ class City:
                f'{self.year} year of foundation'
 
     def __gt__(self, other):
-        if self.population > other.population and \
-                self.square > other.square and \
-                self.year > other.year:
-            return True
-        else:
-            return False
+        return (self.population, self.square, self.year) > (other.population, other.square, other.year)
 
     def __sub__(self, other):
-        return WrongOperatorError('Error!!! Operator subtraction is not available')
+        return WrongOperatorError(error_sub)
 
     def __le__(self, other):
-        return WrongOperatorError('Error!!! Operator less than or equal are not available')
+        return WrongOperatorError(error_le)
 
     def __ge__(self, other):
-        return WrongOperatorError('Error!!! Operator greater than or equal are not available')
+        return WrongOperatorError(error_ge)
 
 
 def present_year():
@@ -46,6 +40,13 @@ def present_year():
 class WrongOperatorError(Exception):
     """"This is exception when the wrong operation is used"""
     pass
+
+
+error_sub = 'Error!!! Operator subtraction is not available'
+error_le = 'Error!!! Operator less than or equal are not available'
+error_ge = 'Error!!! Operator greater than or equal are not available'
+
+new_name_city = 'New City'
 
 city_1 = City('Paris', 500, 400, 1112)
 city_2 = City('London', 400, 300, 1111)
